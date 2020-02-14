@@ -1,0 +1,9 @@
+version: '2'
+services:
+  pipeline-police:
+    build: .
+    environment:
+      - BUILDKITE_TOKEN
+    volumes:
+      - .:/pipeline-police
+      - /pipeline-police/node_modules/
