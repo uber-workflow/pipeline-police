@@ -1,0 +1,23 @@
+steps:
+  - name: ':docker: :package:'
+    plugins:
+      'docker-compose#v1.5.2':
+        build: pipeline-police
+        image-repository: 027047743804.dkr.ecr.us-east-2.amazonaws.com/uber
+    agents:
+      queue: builders
+  - wait
+  - name: ':jest:'
+    command: yarn jest
+    plugins:
+      'docker-compose#v1.5.2':
+        run: pipeline-police
+    agents:
+      queue: workers
+  - name: ':eslint:'
+    command: yarn eslint .
+    plugins:
+      'docker-compose#v1.5.2':
+        run: pipeline-police
+    agents:
+      queue: workers
