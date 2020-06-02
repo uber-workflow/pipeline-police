@@ -46,4 +46,4 @@ test('Buildkite Pipeline Settings', async () => {
     const gating = /!\(build\.author\.teams\sincludes\s".*?"\)\s&&\n\s+build\.pull_request\.id\s!=\snull/;
     expect(steps[0].if).toMatch(gating);
   }
-});
+}, 60000);
